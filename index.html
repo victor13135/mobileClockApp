@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Stopwatch </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--    N A V I G A T I O N    -->
+    <div id="navigation">
+        <button id="navStopwatch" name="STOPWATCH">Stopwatch</button>
+        <button id="navTimer" name="TIMER">Timer</button>
+        <button id="navAlarm" name="ALARM">Alarm</button>
+    </div>
+
+    <!--    S T O P W A T C H    -->
+    <div id="STOPWATCH" class="container">
+        <div id="stopwatchCounter">00:00:00</div>
+        <div id="stopwatchLapCounter"  style="display: none"></div>
+        
+        <div id="lapTimes"></div>
+        
+        <div id="buttons" class="footer">
+            <button id="start">Start</button>
+            <button id="stop" style="display: none">Stop</button>
+            <button id="lap" style="display: none">Lap</button>
+            <button id="resume" style="display: none">Resume</button>
+            <button id="reset" style="display: none">Reset</button>
+        </div>
+    </div>
+    
+    <!--    T I M E R    -->
+    <div id="TIMER" class="container" style="display: none">
+        <div id="timerInputs">
+            <input type="number" name="timerHours" value="0" id="timerInputHours" class="timerInput" min="0" max="24">
+            <input type="number" name="timerMinutes" value="10" id="timerInputMinutes" class="timerInput" min="0" max="59">
+            <input type="number" name="timerSeconds" value="0" id="timerInputSeconds" class="timerInput" min="0" max="59">
+        </div>
+        <div id="tickingTimers" style="display: none">
+            <div id="tickingHours" class="rotatingTimer"></div>
+            <div id="tickingMinutes" class="rotatingTimer"></div>
+            <div id="tickingSeconds" class="rotatingTimer"></div>
+        </div>
+        <div id="timerButtons">
+            <button id="timerStart">Start</button>
+            <button id="timerPause" style="display: none">Pause</button>
+            <button id="timerResume" style="display: none">Resume</button>
+            <button id="timerCancel" style="display: none">Cancel</button>
+        </div>
+    </div>
+    
+    <!--    A L A R M    -->
+    <div id="ALARM" class="container" style="display: none">
+        <div id="alarmHome">
+            <div id="alarmTimes">
+            
+            </div>
+            <button id="addAlarm">+</button>
+        </div>
+        <div id="newAlarm" style="display: none;">
+            <div id="newAlarmButtons">
+                <button id="newAlarmCancel">Cancel</button>
+                <button id="newAlarmSave">Save</button>
+            </div>
+            <div id="alarmDate">
+                <input type="date" name="" id="inputAlarmDate">
+            </div>
+            <div id="alarmTime">
+                <input type="time" name="" id="inputAlarmTime">
+            </div>
+            <div id="alarmRepeat">
+                <button class="alarmRepeatButton">M</button>
+                <button class="alarmRepeatButton">T</button>
+                <button class="alarmRepeatButton">W</button>
+                <button class="alarmRepeatButton">T</button>
+                <button class="alarmRepeatButton">F</button>
+                <button class="alarmRepeatButton">S</button>
+                <button class="alarmRepeatButton">S</button>
+                MOZDA SNUZ I ALARM NAME;
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

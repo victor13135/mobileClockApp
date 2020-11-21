@@ -1,0 +1,16 @@
+#count {
+    width: 300px;
+}
+
+
+.spanCenter {
+    padding: 0 20px;
+}
+#tickingTimers {
+    text-align: center;
+}
+
+.rotatingTimer {
+    display: inline;
+    margin: 0 20px;
+}
