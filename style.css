@@ -1,7 +1,124 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body, html {
+    height: 100%;
+    width: 100%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+body {
+    margin: auto;
+    text-align: center;
+    background-color: whitesmoke;
+    border: 1px black solid;
+}
+.container {
+    width: 100%;
+    position: relative;
+}
+/* H E A D E R */
+header {
+    width: 100%;
+    height: 9vh;
+    overflow: hidden;
+    position: relative;
+}
+#appTitle {
+    float: left;
+    font-size: 3.5vh;
+    padding: 3vh 2vh 3vh 3vh;
+    font-weight: bold;
+}
+#switchContainer {
+    width: 80px;
+    padding-top: 3vh;
+    float: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.switch {
+    float: right;
+    position: relative;
+    width: 50px;
+    height: 28px;
+} 
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+} 
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+} 
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 21px;
+    width: 21px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+} 
+input:checked + .slider {
+    background-color: #2196F3;
+} 
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}  
+input:checked + .slider:before {
+    -webkit-transform: translateX(21px);
+    -ms-transform: translateX(21px);
+    transform: translateX(21px);
+}
+.slider.round {
+    border-radius: 28px;
+} 
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* N A V I G A T I O N */
+#navigation {
+    overflow: hidden;
+    margin: 0 3vw;
+    width: 93vw;
+    max-height: 7vh;
+    border-bottom: darkgray 1px solid;
+}
+.navButton {
+    background-color: inherit;
+    border: none;
+    font-size: 2vh;
+    padding: 10px 0;
+}
+#navStopwatch {
+    width: 28vw;
+}
+#navTimer {
+    width: 17vw;
+}
+#navAlarm {
+    width: 19vw;
+}
+#navDuration {
+    width: 25vw;
+}
 #count {
     width: 300px;
 }
-
 
 .spanCenter {
     padding: 0 20px;
@@ -13,4 +130,61 @@
 .rotatingTimer {
     display: inline;
     margin: 0 20px;
+}
+
+
+#timerInputs {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    padding: 10px 50px;
+}
+.pickerContainer {
+    width: 50px;
+}
+.pickerButton {
+    width: 100%;
+    height: 30px;
+    margin: auto;
+}
+.pickerInput {
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    margin: 2px auto;
+    -webkit-appearance: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 8vh;
+    margin: 0 3%;
+    width: 94%;
+    text-align: center;
+    border-top: darkgray 1px solid;
+}
+.footer button {
+    height: 100%;
+    width: 49%;
+    background-color: inherit;
+    font-size: 2vh;
+    font-weight: bold;
+    border: none;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 450px) {
+    body {
+        width: 450px;
+    }
+    #navStopwatch, #navTimer, #navAlarm, #navDuration {
+        width: 23%;
+    }
 }

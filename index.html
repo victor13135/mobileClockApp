@@ -3,46 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Stopwatch </title>
+    <title> Clock - JS Mobile App </title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="day.css">
 </head>
 <body>
-    <!--    N A V I G A T I O N    -->
+    <!-- H E A D E R -->
+    <header>
+        <span id="appTitle">CLOCK</span>
+        <div id="switchContainer">
+            <label class="switch">
+                <input id="toggleSwitch" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </header>
+    
+    <!-- N A V I G A T I O N -->
     <div id="navigation">
-        <button id="navStopwatch" name="STOPWATCH">Stopwatch</button>
-        <button id="navTimer" name="TIMER">Timer</button>
-        <button id="navAlarm" name="ALARM">Alarm</button>
+        <button id="navAlarm" name="ALARM" class="navButton">ALARM</button>
+        <button id="navDuration" name="DURATION" class="navButton">DURATION</button>
+        <button id="navStopwatch" name="STOPWATCH" class="navButton">STOPWATCH</button>
+        <button id="navTimer" name="TIMER" class="navButton">TIMER</button>
     </div>
 
-    <!--    S T O P W A T C H    -->
+    <!-- S T O P W A T C H -->
     <div id="STOPWATCH" class="container">
         <div id="stopwatchCounter">00:00:00</div>
         <div id="stopwatchLapCounter"  style="display: none"></div>
         
         <div id="lapTimes"></div>
-        
         <div id="buttons" class="footer">
-            <button id="start">Start</button>
-            <button id="stop" style="display: none">Stop</button>
-            <button id="lap" style="display: none">Lap</button>
-            <button id="resume" style="display: none">Resume</button>
-            <button id="reset" style="display: none">Reset</button>
-        </div>
+            <button id="start">START</button>
+            <button id="stop" style="display: none; color: red">STOP</button>
+            <button id="lap" style="display: none">LAP</button>
+            <button id="resume" style="display: none; color: green;">RESUME</button>
+            <button id="reset" style="display: none">RESET</button>
+        </div>    
     </div>
     
-    <!--    T I M E R    -->
+    <!-- T I M E R -->
     <div id="TIMER" class="container" style="display: none">
         <div id="timerInputs">
-            <input type="number" name="timerHours" value="0" id="timerInputHours" class="timerInput" min="0" max="24">
-            <input type="number" name="timerMinutes" value="10" id="timerInputMinutes" class="timerInput" min="0" max="59">
-            <input type="number" name="timerSeconds" value="0" id="timerInputSeconds" class="timerInput" min="0" max="59">
+            <div id="timerInputHoursContainer" class="pickerContainer">
+                <button id="timerInputHoursPlus" class="pickerButton pickerPlus"> + </button>
+                <input type="number" name="timerHours" value="0" id="timerInputHours" class="pickerInput" min="0" max="24">
+                <button id="timerInputHoursMinus" class="pickerButton pickerMinus"> - </button>
+            </div>
+            <div id="timerInputMinutesContainer" class="pickerContainer">
+                <button id="timerInputMinutesPlus" class="pickerButton pickerPlus"> + </button>
+                <input type="number" name="timerMinutes" value="15" id="timerInputMinutes" class="pickerInput" min="0" max="59">
+                <button id="timerInputHoursMinus" class="pickerButton pickerMinus"> - </button>
+            </div>
+            <div id="timerInputSecondsContainer" class="pickerContainer">
+                <button id="timerInputMinutesPlus" class="pickerButton pickerPlus"> + </button>
+                <input type="number" name="timerMinutes" value="15" id="timerInputSeconds" class="pickerInput" min="0" max="59">
+                <button id="timerInputHoursMinus" class="pickerButton pickerMinus"> - </button>
+            </div>
         </div>
         <div id="tickingTimers" style="display: none">
             <div id="tickingHours" class="rotatingTimer"></div>
             <div id="tickingMinutes" class="rotatingTimer"></div>
             <div id="tickingSeconds" class="rotatingTimer"></div>
         </div>
-        <div id="timerButtons">
+        <div id="timerButtons" class=".footer .singleButton">
             <button id="timerStart">Start</button>
             <button id="timerPause" style="display: none">Pause</button>
             <button id="timerResume" style="display: none">Resume</button>
@@ -50,7 +74,7 @@
         </div>
     </div>
     
-    <!--    A L A R M    -->
+    <!-- A L A R M -->
     <div id="ALARM" class="container" style="display: none">
         <div id="alarmHome">
             <div id="alarmTimes">
@@ -79,6 +103,28 @@
                 <button class="alarmRepeatButton">S</button>
                 MOZDA SNUZ I ALARM NAME;
             </div>
+        </div>
+    </div>
+
+    <!-- D U R A T I O N -->
+    <div id="DURATION" class="container" style="display: none">
+        <div id="durationHome">
+            <h5 class="durationTitle">Start date:</h5>
+            <div id="durationStartDate">
+                <input type="number" name="" id="" class="duration">
+                <input type="number" name="" id="" class="duration">
+                <input type="number" name="" id="" class="duration">
+            </div>
+            <h5 class="durationTitle">End date:</h5>
+            <div id="durationStartDate">
+                <input type="number" name="" id="" class="duration">
+                <input type="number" name="" id="" class="duration">
+                <input type="number" name="" id="" class="duration">
+            </div>
+            <button id="calculateDuration">Count!</button>
+        </div>
+        <div id="durationResult" style="display: none;">
+
         </div>
     </div>
     <script src="script.js"></script>

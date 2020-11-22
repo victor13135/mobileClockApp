@@ -13,6 +13,7 @@ let btnStop = document.getElementById("stop");
 let btnReset = document.getElementById("reset");
 let btnResume = document.getElementById("resume");
 let btnLap = document.getElementById("lap");
+let checkToggleSwitch = document.getElementById("toggleSwitch");
 
 let allTheButtons = [btnStart, btnStop, btnReset, btnResume, btnLap];
 
@@ -32,7 +33,7 @@ function returnTwoCharacterString (arg) {
     let result = "";
     if (arg < 10) {
         result = "0" + String(arg);
-    } else if (arg > 100) {
+    } else if (arg >= 100) {
         arg /= 10;
         result = String(arg);
     } else {
@@ -42,7 +43,7 @@ function returnTwoCharacterString (arg) {
 }
 function displayStopwatch (dst, cntr) {
     minutes = cntr / (1000*60);
-    seconds = (cntr / (1000));
+    seconds = (cntr / 1000) % 60;
     miliseconds = cntr % 1000;
     let m="", s="", ms="";
     m = returnTwoCharacterString(minutes);
@@ -66,8 +67,16 @@ function addLapTimeToDisplay (ordinalNumber, cntr, lcntr) {
     newLine.appendChild(newSpanLeft);
     newLine.appendChild(newSpanCenter);
     newLine.appendChild(newSpanRight);
-    divLapTimes.appendChild(newLine);
+    divLapTimes.prepend(newLine);
 };
+checkToggleSwitch.addEventListener("click", () => {
+    let cssFile = document.querySelector("link");
+    if(checkToggleSwitch.checked) {
+        cssFile.setAttribute("href", "night.css");
+    } else {
+        cssFile.setAttribute("href", "style.css");
+    }
+});
 
 divNavigation.addEventListener("click", (event) => {
     if(event.target.tagName == "BUTTON") {
@@ -127,12 +136,12 @@ btnReset.addEventListener( "click", () => {
     clearInterval(timer);
     timer=null;
     counter=0;
-    ordinalNumber=0;
     clearInterval(lapTimer);
     lapTimes=[];
     lapTimer=null;
     lapCounter=0;
     divLapTimes.textContent="";
+    lapOrdinalNumber=0;
     displayStopwatch(divStopwatchCounter, counter);
     displayStopwatch(divStopwatchLapCounter, lapCounter);
     divStopwatchLapCounter.style.display="none";
