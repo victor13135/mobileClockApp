@@ -24,6 +24,14 @@ let lapOrdinalNumber = 0;
 let minutes = 0, seconds = 0, miliseconds = 0;
 let previouslyDisplayed = "STOPWATCH";         // promeni u alarm kad ga napravis!
 
+function clearNavColors() {
+    let btns = document.getElementsByClassName("navButton");
+    for (let i=0; i<btns.length; i++) {
+        btns[i].style.color="inherit";
+        btns[i].style.fontWeight="inherit";
+        btns[i].style.borderBottom="none";  // "darkgrey 1px solid";
+    }
+}
 function hideAllTheButtons() {
     allTheButtons.forEach ( btn => {
         btn.style.display="none";
@@ -80,6 +88,10 @@ checkToggleSwitch.addEventListener("click", () => {
 
 divNavigation.addEventListener("click", (event) => {
     if(event.target.tagName == "BUTTON") {
+        clearNavColors();
+        event.target.style.fontWeight="bold";
+        event.target.style.color="royalblue";
+        event.target.style.borderBottom="royalblue 2px solid";
         let containerToDisplay = event.target.name;
         document.getElementById(previouslyDisplayed).style.display="none";
         previouslyDisplayed = containerToDisplay;
