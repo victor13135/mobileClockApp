@@ -1,40 +1,31 @@
-let divNavigation = document.getElementById("navigation");
-let btnNavStopwatch = document.getElementById("navStopwatch");
-let btnNavTimer = document.getElementById("navTimer");
-
-let inputStopwatch = document.getElementById("count");
-let inputLap = document.getElementById("lapCount");
-let divStopwatchCounter = document.getElementById("stopwatchCounter");
-let divStopwatchLapCounter = document.getElementById("stopwatchLapCounter");
-let divLapTimes = document.getElementById("lapTimes");
-let divButtons = document.getElementById("buttons");
-let btnStart = document.getElementById("start");
-let btnStop = document.getElementById("stop");
-let btnReset = document.getElementById("reset");
-let btnResume = document.getElementById("resume");
-let btnLap = document.getElementById("lap");
-let checkToggleSwitch = document.getElementById("toggleSwitch");
-
-let allTheButtons = [btnStart, btnStop, btnReset, btnResume, btnLap];
-
-let inputAlarmDate = document.getElementById("alarmDate");
-let inputAlarmTime = document.getElementById("alarmTime");
-
+/************************************************
+************    V A R I B L E S    **************
+************************************************/
 let timer = null, lapTimer = null;
 let counter = 0, lapCounter = 0;
 let lapTimes = [], sumTimes = [];
 let lapOrdinalNumber = 0;
+
 let minutes = 0, seconds = 0, miliseconds = 0;
-let previouslyDisplayed = "STOPWATCH";         // promeni u alarm kad ga napravis!
+let previouslyDisplayed = "ALARM";
 let currentDate = "", currentTime = "";
 
+/************************************************
+************   F U N C T I O N S   **************
+************************************************/
 function resetNewAlarmForm() {
-    let newDate = new Date();
-    currentDate = newDate.getFullYear() + "-" + newDate.getMonth()+1 + "-" + newDate.getDate();
-    currentTime = newDate.getHours() + ":" + newDate.getMinutes();
-    console.log(currentDate, currentTime);
-    inputAlarmDate.defaultValue = currentDate;
+    // let newDate = new Date();
+    // currentDate = newDate.getFullYear() + "-" + newDate.getMonth()+1 + "-" + newDate.getDate();
+    // currentTime = newDate.getHours() + ":" + newDate.getMinutes();
+    // let today = new Date().toISOString().substr(0, 10);
+    // console.log(typeof today, today);
+    // inputAlarmDate.value = today;
+
+    //let today = new Date().toISOString().substr(0, 10);
+    //document.querySelector("#alarmDate").value = "2020-05-06";
+    //inputAlarmDate.valueAsDate = new Date();
 }
+//resetNewAlarmForm();
 function clearNavColors() {
     let btns = document.getElementsByClassName("navButton");
     for (let i=0; i<btns.length; i++) {
@@ -70,39 +61,74 @@ function displayStopwatch (dst, cntr) {
     ms = returnTwoCharacterString(miliseconds);
     m = m.slice(0, 2);
     s = s.slice(0, 2)
-    dst.textContent = `${m}:${s}:${ms}`;
+    dst.textContent = `${m}:${s}.${ms}`;
 }
 function addLapTimeToDisplay (ordinalNumber, cntr, lcntr) {
     let newLine = document.createElement("p");
     let newSpanLeft = document.createElement("span");
     newSpanLeft.classList.add("spanLeft");
     newSpanLeft.textContent=returnTwoCharacterString(ordinalNumber);
+    newSpanLeft.style.marginLeft="1vw";
     let newSpanCenter = document.createElement("span");
     newSpanCenter.classList.add("spanCenter");
     displayStopwatch(newSpanCenter, cntr);
+    newSpanCenter.style.margin="0 10vw";
     let newSpanRight = document.createElement("span");
     newSpanRight.classList.add("spanRight");
     displayStopwatch(newSpanRight, lcntr);
     newLine.appendChild(newSpanLeft);
     newLine.appendChild(newSpanCenter);
     newLine.appendChild(newSpanRight);
+    newLine.style.marginBottom="2vh";
     divLapTimes.prepend(newLine);
 };
+function repaintLapTimes () {
+    let listItems = document.querySelectorAll("#lapTimes p");
+        listItems.forEach( item => {
+            item.querySelector(":nth-child(3)").style.color = "teal";
+        });
+    let minIndex = 0, maxIndex = 0;
+    if(lapTimes.length>2) {
+        let min = lapTimes[0], max = lapTimes[0];
+        for(let i=1; i<lapTimes.length; i++) {
+            if(lapTimes[i] > max) {
+                max = lapTimes[i];
+                maxIndex = i;
+            }
+            if(lapTimes[i] < min) {
+                min = lapTimes[i];
+                minIndex = i
+            }
+        }
+    
+        listItems[listItems.length - minIndex - 1].querySelector(":nth-child(3)").style.color = "green";
+        listItems[listItems.length - maxIndex - 1].querySelector(":nth-child(3)").style.color = "red";
+    }
+}
+
+/************************************************
+************  H E A D E R / C S S  **************
+************************************************/
+let checkToggleSwitch = document.getElementById("toggleSwitch");
 checkToggleSwitch.addEventListener("click", () => {
-    let cssFile = document.querySelector("link");
+    let cssFile = document.querySelectorAll("link")[1];
     if(checkToggleSwitch.checked) {
-        cssFile.setAttribute("href", "night.css");
+        cssFile.setAttribute("href", "./style/night.css");
     } else {
-        cssFile.setAttribute("href", "style.css");
+        cssFile.setAttribute("href", "./style/day.css");
     }
 });
 
+/************************************************
+************  N A V I G A T I O N  **************
+************************************************/
+let divNavigation = document.getElementById("navigation");
 divNavigation.addEventListener("click", (event) => {
     if(event.target.tagName == "BUTTON") {
         clearNavColors();
+        event.target.style.color="teal";
+        event.target.style.borderBottom="teal 1px solid";
         event.target.style.fontWeight="bold";
-        event.target.style.color="royalblue";
-        event.target.style.borderBottom="royalblue 2px solid";
         let containerToDisplay = event.target.name;
         document.getElementById(previouslyDisplayed).style.display="none";
         previouslyDisplayed = containerToDisplay;
@@ -110,10 +136,60 @@ divNavigation.addEventListener("click", (event) => {
     }
 });
 
+/*************************************************
+************       A L A R M        **************
+*************************************************/
+let inputAlarmDate = document.getElementById("alarmDate");
+let inputAlarmTime = document.getElementById("alarmTime");
+
+let btnAddAlarm = document.getElementById("addAlarm");
+let btnCancelAlarm = document.getElementById("newAlarmCancel");
+let btnSaveAlarm = document.getElementById("newAlarmSave");
+let divAlarmHome = document.getElementById("alarmHome");
+let divNewAlarm = document.getElementById("newAlarm");
+
+
+btnAddAlarm.addEventListener("click", () => {
+    divAlarmHome.style.display="none";
+    divNewAlarm.style.display="block";
+});
+
+btnCancelAlarm.addEventListener("click", () => {
+    //resetuj sva polja u formi za dodavanje novog alarma
+    divNewAlarm.style.display="none";
+    divAlarmHome.style.display="block";
+});
+
+btnSaveAlarm.addEventListener("click", () => {
+    //upisi u localstorage;
+    //resetuj sva polja u formi za dodavanje novog alarma
+    divNewAlarm.style.display="none";
+    divAlarmHome.style.display="block";
+});
+
+/************************************************
+************   S T O P W A T C H   **************
+************************************************/
+
+let divStopwatchCounters = document.getElementById("stopwatchCounters");
+let divStopwatchCounter = document.getElementById("stopwatchCounter");
+let divStopwatchLapCounter = document.getElementById("stopwatchLapCounter");
+let divLapTimes = document.getElementById("lapTimes");
+
+let btnStart = document.getElementById("start");
+let btnStop = document.getElementById("stop");
+let btnReset = document.getElementById("reset");
+let btnResume = document.getElementById("resume");
+let btnLap = document.getElementById("lap");
+
+let allTheButtons = [btnStart, btnStop, btnReset, btnResume, btnLap];
+
+
 btnStart.addEventListener( "click", () => {
     hideAllTheButtons();
     btnStop.style.display="inline";
     btnLap.style.display="inline";
+    divStopwatchCounter.style.color="teal";
     if (timer === null) {
         timer = setInterval(() => {
             counter+=10;
@@ -167,7 +243,10 @@ btnReset.addEventListener( "click", () => {
     lapOrdinalNumber=0;
     displayStopwatch(divStopwatchCounter, counter);
     displayStopwatch(divStopwatchLapCounter, lapCounter);
+    divStopwatchCounter.style.color="rgba(0, 128, 128, 0.5)";
     divStopwatchLapCounter.style.display="none";
+    divLapTimes.style.display="none";
+    divStopwatchCounters.style.paddingTop="37vh";
 });
 
 btnLap.addEventListener("click", () => {
@@ -179,11 +258,12 @@ btnLap.addEventListener("click", () => {
     }
     lapOrdinalNumber++;
     sumTimes.push(counter);
-    console.log(lapTimes);
-    console.log(sumTimes);
     addLapTimeToDisplay(lapOrdinalNumber, counter, lapCounter);
+    repaintLapTimes();
     lapCounter=0;
+    divStopwatchCounters.style.paddingTop="0";
     divStopwatchLapCounter.style.display="block";
+    divLapTimes.style.display="block";
     if (lapTimer === null) {
         lapTimer = setInterval(() => {
             lapCounter+=10;
@@ -288,35 +368,3 @@ btnTimerResume.addEventListener("click", () => {
 });
 
 
-/*************************************************
-************       A L A R M        **************
-*************************************************/
-
-let btnAddAlarm = document.getElementById("addAlarm");
-let btnCancelAlarm = document.getElementById("newAlarmCancel");
-let btnSaveAlarm = document.getElementById("newAlarmSave");
-let divAlarmHome = document.getElementById("alarmHome");
-let divNewAlarm = document.getElementById("newAlarm");
-
-
-btnAddAlarm.addEventListener("click", () => {
-    divAlarmHome.style.display="none";
-    divNewAlarm.style.display="block";
-    resetNewAlarmForm();
-});
-
-btnCancelAlarm.addEventListener("click", ()=> {
-    //resetuj sva polja u formi za dodavanje novog alarma
-    divNewAlarm.style.display="none";
-    divAlarmHome.style.display="block";
-    let respo = document.getElementById("alarmDate").value;
-    let sati = inputAlarmTime.value;
-    console.log(sati);
-});
-
-btnSaveAlarm.addEventListener("click", () => {
-    //upisi u localstorage;
-    //resetuj sva polja u formi za dodavanje novog alarma
-    divNewAlarm.style.display="none";
-    divAlarmHome.style.display="block";
-});

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Clock - JS Mobile App </title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="day.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/day.css">
 </head>
 <body>
     <!-- H E A D E R -->
@@ -37,7 +37,7 @@
         </div>
         <div id="newAlarm" style="display: none;">
             <div id="alarmDate">
-                <input type="date" id="inputAlarmDate">
+                <input type="datetime" id="inputAlarmDate">
             </div>
             <div id="alarmTime">
                 <input type="time" id="inputAlarmTime">
@@ -64,15 +64,41 @@
         <div id="durationHome">
             <h5 class="durationTitle">Start date:</h5>
             <div id="durationStartDate">
-                <input type="number" name="" id="" class="duration">
-                <input type="number" name="" id="" class="duration">
-                <input type="number" name="" id="" class="duration">
+                <div class="inputDurationLabels">
+                    <span class="x2">Day:</span>
+                    <span class="x2">Month:</span>
+                    <span class="x4">Year:</span>
+                    <span class="x4">Date:</span>
+                </div>
+                <div class="inputDurationFields">
+                    <input type="text" placeholder="dd" autocomplete="off" maxlength="2" size="3" title="Please enter the day of the month as a one or two-digit number. The valid range is from 1 to 31." id="d1" class="duration">
+
+                    <input type="text" placeholder="mm" autocomplete="off" maxlength="2" title="Please enter the month of the year as a one or two-digit number, or as a name. The valid numeric range is from 1 to 12, and valid names, for example, are 'Oct' or 'October'." id="m1" class="duration">
+
+                    <input type="text" placeholder="yyyy" autocomplete="off" maxlength="4" size="5" id="y1" title="Enter year as a 4-digit number." class="duration">
+
+                    <input type="date" class="durationDatePicker" id="durDate1">
+                </div>
+                <a href="#" id="today1" class="bigger" title="Set Start Date to today's date.">Today</a>
             </div>
             <h5 class="durationTitle">End date:</h5>
             <div id="durationStartDate">
-                <input type="number" name="" id="" class="duration">
-                <input type="number" name="" id="" class="duration">
-                <input type="number" name="" id="" class="duration">
+                <div class="inputDurationLabels">
+                    <span class="x2">Day:</span>
+                    <span class="x2">Month:</span>
+                    <span class="x4">Year:</span>
+                    <span class="x4">Date:</span>
+                </div>
+                <div class="inputDurationFields">
+                    <input type="text" placeholder="dd" autocomplete="off" maxlength="2" size="3" title="Please enter the day of the month as a one or two-digit number. The valid range is from 1 to 31." id="d2" class="duration">
+
+                    <input type="text" placeholder="mm" autocomplete="off" maxlength="2" title="Please enter the month of the year as a one or two-digit number, or as a name. The valid numeric range is from 1 to 12, and valid names, for example, are 'Oct' or 'October'." id="m2" class="duration">
+
+                    <input type="text" placeholder="yyyy" autocomplete="off" maxlength="4" size="5" id="y2" title="Enter year as a 4-digit number." class="duration">
+
+                    <input type="date" class="durationDatePicker" id="durDate2">
+                </div>
+                <a href="#" id="today1" class="bigger" title="Set Start Date to today's date.">Today</a>
             </div>
             <button id="calculateDuration">Count!</button>
         </div>
@@ -85,19 +111,21 @@
     <div id="STOPWATCH" class="container" style="display: none;">
         <div id="stopwatchCounters">
             <div id="stopwatchCounter">00:00:00</div>
-            <div id="stopwatchLapCounter"  style="display: none"></div>
+            <div id="stopwatchLapCounter" style="display: none"></div>
         </div>
-        <div id="lapTimes">
+        <div id="lapTimes" style="display: none">
 
         </div>
         <div id="buttons" class="footer">
-            <button id="start">START</button>
-            <button id="stop" style="display: none; color: red">STOP</button>
-            <button id="lap" style="display: none">LAP</button>
-            <button id="resume" style="display: none; color: green;">RESUME</button>
-            <button id="reset" style="display: none">RESET</button>
+            <button id="start" class="footerBtn">START</button>
+            <button id="stop" style="display: none; color: red" class="footerBtn">STOP</button>
+            <button id="lap" style="display: none" class="footerBtn">LAP</button>
+            <button id="resume" style="display: none; color: green;" class="footerBtn">RESUME</button>
+            <button id="reset" style="display: none" class="footerBtn">RESET</button>
         </div>    
     </div>
+    
+    
     
     <!-- T I M E R -->
     <div id="TIMER" class="container" style="display: none">
@@ -125,9 +153,9 @@
         </div>
         <div id="timerButtons" class=".footer .singleButton">
             <button id="timerStart">Start</button>
-            <button id="timerPause" style="display: none">Pause</button>
-            <button id="timerResume" style="display: none">Resume</button>
-            <button id="timerCancel" style="display: none">Cancel</button>
+            <button id="timerPause" style="display: none" class="footerBtn">Pause</button>
+            <button id="timerResume" style="display: none" class="footerBtn">Resume</button>
+            <button id="timerCancel" style="display: none" class="footerBtn">Cancel</button>
         </div>
     </div>
     <script src="script.js"></script>
