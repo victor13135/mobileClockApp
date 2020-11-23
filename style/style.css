@@ -103,7 +103,7 @@ input:checked + .slider:before {
 .navButton {
     background-color: inherit;
     border: none;
-    font-size: 2vh;
+    font-size: 2.5vh;
     padding: 10px 0;    
 }
 #navAlarm {
@@ -235,7 +235,7 @@ input::-webkit-inner-spin-button {
     height: 100%;
     width: 49%;
     background-color: inherit;
-    font-size: 2vh;
+    font-size: 2.5vh;
     font-weight: bold;
     border: none;
 }
