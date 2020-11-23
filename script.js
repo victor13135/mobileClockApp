@@ -72,7 +72,7 @@ function addLapTimeToDisplay (ordinalNumber, cntr, lcntr) {
     let newSpanCenter = document.createElement("span");
     newSpanCenter.classList.add("spanCenter");
     displayStopwatch(newSpanCenter, cntr);
-    newSpanCenter.style.margin="0 10vw";
+    newSpanCenter.style.margin="0 8vw";
     let newSpanRight = document.createElement("span");
     newSpanRight.classList.add("spanRight");
     displayStopwatch(newSpanRight, lcntr);
@@ -246,7 +246,7 @@ btnReset.addEventListener( "click", () => {
     divStopwatchCounter.style.color="rgba(0, 128, 128, 0.5)";
     divStopwatchLapCounter.style.display="none";
     divLapTimes.style.display="none";
-    divStopwatchCounters.style.paddingTop="37vh";
+    divStopwatchCounters.style.paddingTop="33vh";
 });
 
 btnLap.addEventListener("click", () => {

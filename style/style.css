@@ -194,8 +194,8 @@ input::-webkit-inner-spin-button {
 /* S T O P W A T C H */
 
 #stopwatchCounters {
-    padding-top: 37vh;
-    height: 37vh;
+    padding-top: 33vh;
+    height: 33vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -213,9 +213,9 @@ input::-webkit-inner-spin-button {
     margin: 0 auto;
     padding: 2vh;
     font-size: 2vh;
-    width: 70vw;
+    width: 75vw;
     border-top: darkgray 1px solid;
-    max-height: 37vh;
+    max-height: 31vh;
     overflow-y: auto;
     overflow-x: hidden;
 }
