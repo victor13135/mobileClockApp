@@ -120,6 +120,27 @@ input:checked + .slider:before {
 #navDuration {
     width: 25vw;
 }
+
+/* N A V I G A T I O N */
+#addAlarm {
+    font-family: 'Courier New', Courier, monospace;
+    position: absolute;
+    background-color: seagreen;
+    color: whitesmoke;
+    width: 50px;
+    height: 50px;
+    font-size: 250%;
+    font-weight: normal;
+    vertical-align: middle;
+    border-radius: 100%;
+    right: 4vw;
+    top: 0vh;
+    box-shadow: none;
+}
+
+
+
+
 #count {
     width: 300px;
 }
@@ -164,6 +185,8 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
+
+
 .footer {
     position: fixed;
     left: 0;
@@ -183,9 +206,9 @@ input::-webkit-inner-spin-button {
     border: none;
 }
 
-@media only screen and (min-width: 550px) {
+@media only screen and (min-width: 601px) {
     body {
-        width: 550px;
+        width: 600px;
     }
     #navStopwatch, #navTimer, #navAlarm, #navDuration {
         width: 23%;
