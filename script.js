@@ -17,13 +17,24 @@ let checkToggleSwitch = document.getElementById("toggleSwitch");
 
 let allTheButtons = [btnStart, btnStop, btnReset, btnResume, btnLap];
 
+let inputAlarmDate = document.getElementById("alarmDate");
+let inputAlarmTime = document.getElementById("alarmTime");
+
 let timer = null, lapTimer = null;
 let counter = 0, lapCounter = 0;
 let lapTimes = [], sumTimes = [];
 let lapOrdinalNumber = 0;
 let minutes = 0, seconds = 0, miliseconds = 0;
 let previouslyDisplayed = "STOPWATCH";         // promeni u alarm kad ga napravis!
+let currentDate = "", currentTime = "";
 
+function resetNewAlarmForm() {
+    let newDate = new Date();
+    currentDate = newDate.getFullYear() + "-" + newDate.getMonth()+1 + "-" + newDate.getDate();
+    currentTime = newDate.getHours() + ":" + newDate.getMinutes();
+    console.log(currentDate, currentTime);
+    inputAlarmDate.defaultValue = currentDate;
+}
 function clearNavColors() {
     let btns = document.getElementsByClassName("navButton");
     for (let i=0; i<btns.length; i++) {
@@ -286,15 +297,21 @@ let btnCancelAlarm = document.getElementById("newAlarmCancel");
 let btnSaveAlarm = document.getElementById("newAlarmSave");
 let divAlarmHome = document.getElementById("alarmHome");
 let divNewAlarm = document.getElementById("newAlarm");
+
+
 btnAddAlarm.addEventListener("click", () => {
     divAlarmHome.style.display="none";
     divNewAlarm.style.display="block";
+    resetNewAlarmForm();
 });
 
 btnCancelAlarm.addEventListener("click", ()=> {
     //resetuj sva polja u formi za dodavanje novog alarma
     divNewAlarm.style.display="none";
     divAlarmHome.style.display="block";
+    let respo = document.getElementById("alarmDate").value;
+    let sati = inputAlarmTime.value;
+    console.log(sati);
 });
 
 btnSaveAlarm.addEventListener("click", () => {
