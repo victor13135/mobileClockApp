@@ -294,6 +294,19 @@ let divTickingMinutes = document.getElementById("tickingMinutes");
 let divTickingSeconds = document.getElementById("tickingSeconds");
 
 let allTheTimerButtons = [btnTimerCancel, btnTimerResume, btnTimerStart, btnTimerPause];
+
+divTimerInputs.addEventListener("click", (event) => {
+    if(event.target.tagName == "BUTTON") {
+        let container = event.path[1];
+        let numberInput = container.querySelector("input");
+        let newValue = parseInt(numberInput.value);
+        newValue += parseInt(event.target.value);
+        if (newValue > -1 && newValue <60) {
+            numberInput.value = newValue;
+        }
+    }
+});
+
 function hideAllTheTimerButtons () {
     allTheTimerButtons.forEach( btn => {
         btn.style.display="none";
@@ -347,7 +360,7 @@ btnTimerStart.addEventListener("click", () => {
 
 btnTimerCancel.addEventListener("click", () => {
     divTickingTimers.style.display="none";
-    divTimerInputs.style.display="block";
+    divTimerInputs.style.display="flex";
     hideAllTheTimerButtons();
     btnTimerStart.style.display="inline";
 });
@@ -366,5 +379,3 @@ btnTimerResume.addEventListener("click", () => {
     btnTimerCancel.style.display="inline";
     startTheTimer();
 });
-
-

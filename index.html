@@ -114,7 +114,6 @@
             <div id="stopwatchLapCounter" style="display: none"></div>
         </div>
         <div id="lapTimes" style="display: none">
-
         </div>
         <div id="buttons" class="footer">
             <button id="start" class="footerBtn">START</button>
@@ -125,25 +124,26 @@
         </div>    
     </div>
     
-    
-    
     <!-- T I M E R -->
     <div id="TIMER" class="container" style="display: none">
         <div id="timerInputs">
             <div id="timerInputHoursContainer" class="pickerContainer">
-                <button id="timerInputHoursPlus" class="pickerButton pickerPlus"> + </button>
+                <span>Hours</span>
+                <button id="timerInputHoursPlus" value="1" class="pickerButton pickerPlus"> + </button>
                 <input type="number" name="timerHours" value="0" id="timerInputHours" class="pickerInput" min="0" max="24">
-                <button id="timerInputHoursMinus" class="pickerButton pickerMinus"> - </button>
+                <button id="timerInputHoursMinus" value="-1" class="pickerButton pickerMinus"> - </button>
             </div>
             <div id="timerInputMinutesContainer" class="pickerContainer">
-                <button id="timerInputMinutesPlus" class="pickerButton pickerPlus"> + </button>
+                <span>Minutes</span>
+                <button id="timerInputMinutesPlus" value="1" class="pickerButton pickerPlus"> + </button>
                 <input type="number" name="timerMinutes" value="15" id="timerInputMinutes" class="pickerInput" min="0" max="59">
-                <button id="timerInputHoursMinus" class="pickerButton pickerMinus"> - </button>
+                <button id="timerInputHoursMinus" value="-1" class="pickerButton pickerMinus"> - </button>
             </div>
             <div id="timerInputSecondsContainer" class="pickerContainer">
-                <button id="timerInputMinutesPlus" class="pickerButton pickerPlus"> + </button>
-                <input type="number" name="timerMinutes" value="15" id="timerInputSeconds" class="pickerInput" min="0" max="59">
-                <button id="timerInputHoursMinus" class="pickerButton pickerMinus"> - </button>
+                <span>Seconds</span>
+                <button id="timerInputMinutesPlus" value="1" class="pickerButton pickerPlus"> + </button>
+                <input type="number" name="timerMinutes" value="0" id="timerInputSeconds" class="pickerInput" min="0" max="59">
+                <button id="timerInputHoursMinus" value="-1" class="pickerButton pickerMinus"> - </button>
             </div>
         </div>
         <div id="tickingTimers" style="display: none">
@@ -151,11 +151,11 @@
             <div id="tickingMinutes" class="rotatingTimer"></div>
             <div id="tickingSeconds" class="rotatingTimer"></div>
         </div>
-        <div id="timerButtons" class=".footer .singleButton">
-            <button id="timerStart">Start</button>
-            <button id="timerPause" style="display: none" class="footerBtn">Pause</button>
-            <button id="timerResume" style="display: none" class="footerBtn">Resume</button>
-            <button id="timerCancel" style="display: none" class="footerBtn">Cancel</button>
+        <div id="timerButtons" class="footer">
+            <button id="timerStart" class="footerBtn">START</button>
+            <button id="timerPause" style="display: none" class="footerBtn">PAUSE</button>
+            <button id="timerResume" style="display: none; color: green" class="footerBtn">RESUME</button>
+            <button id="timerCancel" style="display: none" class="footerBtn">CANCEL</button>
         </div>
     </div>
     <script src="script.js"></script>

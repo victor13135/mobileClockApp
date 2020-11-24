@@ -15,11 +15,14 @@ body {
 }
 button {
     outline: none;
+    color: inherit;
 }
 .container {
     width: 100%;
     position: relative;
 }
+
+
 /* H E A D E R */
 header {
     width: 100%;
@@ -92,6 +95,7 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
+
 /* N A V I G A T I O N */
 #navigation {
     overflow: hidden;
@@ -124,7 +128,8 @@ input:checked + .slider:before {
     width: 25vw;
 }
 
-/* N A V I G A T I O N */
+
+/* A L A R M */
 #addAlarm {
     font-family: 'Courier New', Courier, monospace;
     position: fixed;
@@ -145,54 +150,10 @@ input:checked + .slider:before {
 }
 
 
-
-#count {
-    width: 300px;
-}
-
-.spanCenter {
-    padding: 0 20px;
-}
-#tickingTimers {
-    text-align: center;
-}
-
-.rotatingTimer {
-    display: inline;
-    margin: 0 20px;
-}
-
-
-#timerInputs {
-    display: flex;
-    flex-flow: row;
-    justify-content: space-evenly;
-    padding: 10px 50px;
-}
-.pickerContainer {
-    width: 50px;
-}
-.pickerButton {
-    width: 100%;
-    height: 30px;
-    margin: auto;
-}
-.pickerInput {
-    width: 100%;
-    padding: 10px 0;
-    text-align: center;
-    margin: 2px auto;
-    -webkit-appearance: none;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
+/* D U R A T I O N */
 
 
 /* S T O P W A T C H */
-
 #stopwatchCounters {
     padding-top: 33vh;
     height: 33vh;
@@ -200,7 +161,6 @@ input::-webkit-inner-spin-button {
     flex-direction: column;
     justify-content: center;
 }
-
 #stopwatchCounter {
     color: rgba(0, 128, 128, 0.5);
     font-size: 6vh;
@@ -219,8 +179,59 @@ input::-webkit-inner-spin-button {
     overflow-y: auto;
     overflow-x: hidden;
 }
+.spanCenter {
+    padding: 0 20px;
+}
 
 
+/* T I M E R */
+#tickingTimers {
+    text-align: center;
+}
+.rotatingTimer {
+    display: inline;
+    margin: 0 20px;
+}
+#timerInputs {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    padding: 10px 50px;
+}
+.pickerContainer {
+    padding-top: 20vh;
+    width: 20vw;
+}
+.pickerContainer span {
+    display: inline-block;
+    margin-bottom: 1vh;
+}
+.pickerButton {
+    width: 75%;
+    height: 30px;
+    margin: auto;
+    height: 6vh;
+    font-size: 3vh;
+}
+.pickerInput {
+    width: 75%;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 3vh;
+    margin: 2px auto;
+    -webkit-appearance: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+#tickingTimers {
+    padding-top: 30vh;
+    color: rgb(0, 128, 128);
+    font-size: 6vh;
+}
+
+/* F O O T E R */
 .footer {
     position: fixed;
     left: 0;
@@ -240,6 +251,8 @@ input::-webkit-inner-spin-button {
     border: none;
 }
 
+
+/* M E D I A   Q U E R I E S */
 @media only screen and (min-width: 601px) {
     body {
         width: 600px;
