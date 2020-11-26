@@ -34,10 +34,35 @@ function clearNavColors() {
         btns[i].style.borderBottom="none";  // "darkgrey 1px solid";
     }
 }
+function paintTheTimer(color) {
+    divRightHalf.style.backgroundColor = color;
+    divLeftHalf.style.backgroundColor = color;
+    divCenterMask.style.color = color;
+}
 function hideAllTheButtons() {
     allTheButtons.forEach ( btn => {
         btn.style.display="none";
     });
+}
+function hideAllTheTimerButtons () {
+    allTheTimerButtons.forEach( btn => {
+        btn.style.display="none";
+    });
+}
+function timerReset() {
+    divLeftMask.style.transform=`rotate(0deg)`;
+    divRightMask.style.transform=`rotate(0deg)`;
+    divRightHalf.style.zIndex = 35;
+    timerSeconds=0; timerMinutes=0; timerHours=0;
+    countdownCounterStarting=0; globalSecondsLeft=0;
+    angle=6;    
+    document.getElementById("negativeAlarm").style.display="none";
+    paintTheTimer("teal");
+    clearInterval(countdownTimer);
+    countdownTimer = null;
+    clearInterval(negativeTimer);
+    negativeTimer = null;
+    minusSeconds=0; minusMinutes=0; minusHours=0;
 }
 function returnTwoCharacterString (arg) {
     let result = "";
@@ -60,8 +85,15 @@ function displayStopwatch (dst, cntr) {
     s = returnTwoCharacterString(seconds);
     ms = returnTwoCharacterString(miliseconds);
     m = m.slice(0, 2);
-    s = s.slice(0, 2)
+    s = s.slice(0, 2);
     dst.textContent = `${m}:${s}.${ms}`;
+}
+function displayTimer(timerHrs, timerMins, timerSecs) {
+    let h="", m="", s="";
+    h = returnTwoCharacterString(timerHrs);     h = h.slice(0, 2);
+    m = returnTwoCharacterString(timerMins);    m = m.slice(0, 2);
+    s = returnTwoCharacterString(timerSecs);    s = s.slice(0, 2);
+    divCenterMask.innerHTML = `<span id="negativeAlarm" style="display: none; color: red">-</span>${h}:${m}:${s}`;
 }
 function addLapTimeToDisplay (ordinalNumber, cntr, lcntr) {
     let newLine = document.createElement("p");
@@ -277,23 +309,33 @@ btnLap.addEventListener("click", () => {
 ************       T I M E R        **************
 *************************************************/
 
-let divTimerButtons = document.getElementById("timerButtons")
+let divTimerButtons = document.getElementById("timerButtons")               // dugmici
 let btnTimerStart = document.getElementById("timerStart");
 let btnTimerPause = document.getElementById("timerPause");
+let btnTimerRestart = document.getElementById("timerRestart");
 let btnTimerCancel = document.getElementById("timerCancel");
 let btnTimerResume = document.getElementById("timerResume");
+let allTheTimerButtons = [btnTimerCancel, btnTimerResume, btnTimerRestart, btnTimerStart, btnTimerPause];
 
-let divTimerInputs = document.getElementById("timerInputs");
+let divTimerInputs = document.getElementById("timerInputs");                // input polja
 let inputTimerHours = document.getElementById("timerInputHours");
 let inputTimerMinutes = document.getElementById("timerInputMinutes");
 let inputTimerSeconds = document.getElementById("timerInputSeconds");
 
-let divTickingTimers = document.getElementById("tickingTimers");
-let divTickingHours = document.getElementById("tickingHours");
-let divTickingMinutes = document.getElementById("tickingMinutes");
-let divTickingSeconds = document.getElementById("tickingSeconds");
+let divTickingTimers = document.getElementById("tickingTimers");            // spiner
+let divRightHalf = document.getElementById("rightHalf");
+let divRightMask = document.getElementById("rightMask");
+let divLeftHalf = document.getElementById('leftHalf');
+let divLeftMask = document.getElementById("leftMask");
+let divCenterMask = document.getElementById("centerMask");
 
-let allTheTimerButtons = [btnTimerCancel, btnTimerResume, btnTimerStart, btnTimerPause];
+divRightMask.style.transformOrigin= "0 50%";
+divLeftMask.style.transformOrigin= "100% 50%";
+
+divRightMask.style.zIndex = 40;
+divRightHalf.style.zIndex = 35;
+divLeftMask.style.zIndex = 50;
+divLeftHalf.style.zIndex = 45;
 
 divTimerInputs.addEventListener("click", (event) => {
     if(event.target.tagName == "BUTTON") {
@@ -307,15 +349,19 @@ divTimerInputs.addEventListener("click", (event) => {
     }
 });
 
-function hideAllTheTimerButtons () {
-    allTheTimerButtons.forEach( btn => {
-        btn.style.display="none";
-    });
-}
+let angle = 6;
+let globalSecondsLeft = 0;
+let countdownCounterStarting = 0;
+let angleStep;
+let minusSeconds = 0; let minusMinutes = 0; let minusHours = 0;
+let negativeTimer = null;
+
 function startTheTimer() {
+    displayTimer(timerHours, timerMinutes, timerSeconds);
     if(countdownTimer === null) {
         countdownTimer = setInterval(() => {
             timerSeconds--;
+            globalSecondsLeft--;
             if(timerSeconds == -1) {
                 timerMinutes--;
                 timerSeconds=59;
@@ -324,14 +370,56 @@ function startTheTimer() {
                 timerHours--;
                 timerMinutes=59;
             }
-            divTickingHours.textContent = timerHours;
-            divTickingMinutes.textContent = timerMinutes;   
-            divTickingSeconds.textContent = timerSeconds;
-            if (timerHours == 0 && timerMinutes == 0 && timerSeconds == 0) {
-                console.log("GOTOVO!");
-                clearInterval(countdownTimer);
-                countdownTimer = null;
+            if(timerSeconds <= 5 && timerMinutes == 0 && timerHours == 0) {
+                paintTheTimer("red");
             }
+            displayTimer(timerHours, timerMinutes, timerSeconds);
+            angleStep = 360/countdownCounterStarting;
+            angle += angleStep;
+
+            if(angle>6 && angle<=180) {
+                divRightMask.style.transform=`rotate(${angle-6}deg)`;
+                console.log(angle-6);
+                console.log("prvaPolutka");
+            } else if (angle>6 && angle<=360) {
+                divRightHalf.style.zIndex = 60;
+                divLeftMask.style.transform=`rotate(${angle-180-6}deg)`;
+                console.log(angle-180-6);
+                console.log("druga");
+            } else {
+                console.log("kraj");
+                console.log(angle, angleStep);
+                divRightHalf.style.zIndex = 60;
+                divLeftMask.style.transform=`rotate(180deg)`;
+                divRightMask.style.transform=`rotate(180deg)`;
+                displayTimer(timerHours, timerMinutes, timerSeconds);
+                if (timerHours == 0 && timerMinutes == 0 && timerSeconds == 0) {
+                    hideAllTheTimerButtons();
+                    btnTimerRestart.style.display="inline";
+                    btnTimerCancel.style.display="inline";
+                    
+                    console.log("GOTOVO!");
+                    //alert("Time's up!");
+                    clearInterval(countdownTimer);
+                    countdownTimer = null;
+                    if(negativeTimer === null) {
+                        negativeTimer = setInterval( () => {
+                            minusSeconds++;
+                            if(minusSeconds>59) {
+                                minusSeconds = 0;
+                                minusMinutes++;
+                            }
+                            if(minusMinutes>59) {
+                                minusMinutes = 0;
+                                minusHours++;
+                            }
+                            displayTimer(minusHours, minusMinutes, minusSeconds);
+                            document.getElementById("negativeAlarm").style.display="inline";
+                        }, 1000);
+                    }
+                }
+            }
+            
         }, 1000);
     }
 }
@@ -349,9 +437,8 @@ btnTimerStart.addEventListener("click", () => {
         hideAllTheTimerButtons();
         btnTimerPause.style.display="inline";
         btnTimerCancel.style.display="inline";
-        divTickingHours.textContent = timerHours;
-        divTickingMinutes.textContent = timerMinutes;
-        divTickingSeconds.textContent = timerSeconds;
+        countdownCounterStarting = timerSeconds + timerMinutes*60 + timerHours*3600;
+        globalSecondsLeft = countdownCounterStarting;
         startTheTimer();
     } else {
         console.log("sve nule!");
@@ -363,6 +450,7 @@ btnTimerCancel.addEventListener("click", () => {
     divTimerInputs.style.display="flex";
     hideAllTheTimerButtons();
     btnTimerStart.style.display="inline";
+    timerReset();
 });
 
 btnTimerPause.addEventListener("click", () => {
@@ -379,3 +467,16 @@ btnTimerResume.addEventListener("click", () => {
     btnTimerCancel.style.display="inline";
     startTheTimer();
 });
+
+btnTimerRestart.addEventListener("click", () => {
+    timerReset();
+    timerHours = Number(inputTimerHours.value);
+    timerMinutes = Number(inputTimerMinutes.value);
+    timerSeconds = Number(inputTimerSeconds.value);
+    hideAllTheTimerButtons();
+    btnTimerPause.style.display="inline";
+    btnTimerCancel.style.display="inline";
+    countdownCounterStarting = timerSeconds + timerMinutes*60 + timerHours*3600;
+    globalSecondsLeft = countdownCounterStarting;
+    startTheTimer();
+})

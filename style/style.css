@@ -4,8 +4,8 @@
     padding: 0;
 }
 body, html {
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     font-family: 'PT Sans', sans-serif;
 }
 body {
@@ -21,7 +21,6 @@ button {
     width: 100%;
     position: relative;
 }
-
 
 /* H E A D E R */
 header {
@@ -95,19 +94,17 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-
 /* N A V I G A T I O N */
 #navigation {
     overflow: hidden;
     margin: 0 3vw;
-    width: 93vw;
     max-height: 7vh;
     border-bottom: darkgray 1px solid;
 }
 .navButton {
     background-color: inherit;
     border: none;
-    font-size: 2.5vh;
+    font-size: 3.5vw;
     padding: 10px 0;    
 }
 #navAlarm {
@@ -146,7 +143,7 @@ input:checked + .slider:before {
     box-shadow: none;
 }
 #newAlarm {
-    padding: 20px;
+    padding: 20%;
 }
 
 
@@ -225,10 +222,60 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
+#spinnerContainer {
+    padding-top: 10vh;
+    margin: 0 auto;
+    text-align: center;
+}
 #tickingTimers {
-    padding-top: 30vh;
-    color: rgb(0, 128, 128);
+    color: teal;
     font-size: 6vh;
+    position: relative;
+    margin: 0 auto;
+    width: 300px;
+    height: 300px;
+    background-color: inherit;
+}
+#centerMask {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    height: 240px;
+    width: 240px;
+    border-radius: 50%;
+    background-color: inherit;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 95px;
+    z-index: 75;
+}
+#rightHalf, #rightMask {
+    position: absolute;
+    left: 150px;;
+    top: 25px;
+    height: 250px;
+    width: 125px;
+    border-radius: 0 125px 125px 0;
+    border: inherit 1px solid;
+    border-left: none;
+}
+#leftHalf, #leftMask {
+    position: absolute;
+    left: 25px;;
+    top: 25px;
+    height: 250px;
+    width: 125px;
+    border-radius: 125px 0 0 125px;
+    border: inherit 1px solid;
+    border-right: none;
+}
+#rightHalf, #leftHalf {
+    background-color: teal;
+    /* background-image: linear-gradient(teal, darkgray); */
+}
+#rightMask, #leftMask {
+    background-color: inherit;
+    border: inherit 1px solid;
 }
 
 /* F O O T E R */
@@ -237,8 +284,8 @@ input::-webkit-inner-spin-button {
     left: 0;
     bottom: 0;
     height: 9vh;
-    margin: 0 3%;
-    width: 94%;
+    margin: 0 3vh;
+    width: 94vw;
     text-align: center;
     border-top: darkgray 1px solid;
 }
@@ -258,7 +305,30 @@ input::-webkit-inner-spin-button {
         width: 600px;
         border: 1px black solid;
     }
+    #navigation {
+        width: 93%;
+        margin: 0 3%;
+    }
     #navStopwatch, #navTimer, #navAlarm, #navDuration {
         width: 23%;
+    }
+    /* F O O T E R */
+    .footer {
+        position: fixed;           /* (50% - 300px) */
+        bottom: 0;
+        height: 9vh;
+        text-align: center;
+        margin: 0 3%;
+        border-top: none;
+    }
+    .footer button {
+        height: 100%;
+        width: 24%;
+        background-color: inherit;
+        font-size: 2.5vh;
+        font-weight: bold;
+        border: none;
+        margin: 0 1%;
+        border-top: darkgray 1px solid;
     }
 }

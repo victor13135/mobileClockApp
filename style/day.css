@@ -14,3 +14,9 @@
 
 
 /* T I M E R */
+#spinnerContainer {
+    background-color: whitesmoke;
+}
+#tickingTimers {
+    background-color: inherit;
+}

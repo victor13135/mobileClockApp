@@ -136,25 +136,30 @@
             <div id="timerInputMinutesContainer" class="pickerContainer">
                 <span>Minutes</span>
                 <button id="timerInputMinutesPlus" value="1" class="pickerButton pickerPlus"> + </button>
-                <input type="number" name="timerMinutes" value="15" id="timerInputMinutes" class="pickerInput" min="0" max="59">
-                <button id="timerInputHoursMinus" value="-1" class="pickerButton pickerMinus"> - </button>
+                <input type="number" name="timerMinutes" value="0" id="timerInputMinutes" class="pickerInput" min="0" max="59">
+                <button id="timerInputMinutesMinus" value="-1" class="pickerButton pickerMinus"> - </button>
             </div>
             <div id="timerInputSecondsContainer" class="pickerContainer">
                 <span>Seconds</span>
-                <button id="timerInputMinutesPlus" value="1" class="pickerButton pickerPlus"> + </button>
-                <input type="number" name="timerMinutes" value="0" id="timerInputSeconds" class="pickerInput" min="0" max="59">
-                <button id="timerInputHoursMinus" value="-1" class="pickerButton pickerMinus"> - </button>
+                <button id="timerInputSecondsPlus" value="1" class="pickerButton pickerPlus"> + </button>
+                <input type="number" name="timerMinutes" value="10" id="timerInputSeconds" class="pickerInput" min="0" max="59">
+                <button id="timerInputSecondsMinus" value="-1" class="pickerButton pickerMinus"> - </button>
             </div>
         </div>
-        <div id="tickingTimers" style="display: none">
-            <div id="tickingHours" class="rotatingTimer"></div>
-            <div id="tickingMinutes" class="rotatingTimer"></div>
-            <div id="tickingSeconds" class="rotatingTimer"></div>
+        <div id="spinnerContainer">
+            <div id="tickingTimers" style="display: none">
+                <div id="rightHalf"></div>
+                <div id="rightMask"></div>
+                <div id="leftHalf"></div>
+                <div id="leftMask"></div>
+                <div id="centerMask"></div>
+            </div>
         </div>
         <div id="timerButtons" class="footer">
             <button id="timerStart" class="footerBtn">START</button>
             <button id="timerPause" style="display: none" class="footerBtn">PAUSE</button>
             <button id="timerResume" style="display: none; color: green" class="footerBtn">RESUME</button>
+            <button id="timerRestart" style="display: none" class="footerBtn">RESTART</button>
             <button id="timerCancel" style="display: none" class="footerBtn">CANCEL</button>
         </div>
     </div>
